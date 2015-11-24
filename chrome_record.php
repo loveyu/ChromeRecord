@@ -23,9 +23,8 @@ if($is_mongo) {
 	foreach($object as $v) {
 		$v['time'] = time();
 		$v['ua'] = $_SERVER['HTTP_USER_AGENT'];
-
 		if(!isset($collection_map[$v['type']])) {
-			$collection_map[$v['type']] = $db->$object['type'];
+			$collection_map[$v['type']] = $db->$v['type'];
 		}
 		$collection_map[$v['type']]->insert($v);
 		$success++;
