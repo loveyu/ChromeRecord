@@ -1,3 +1,5 @@
+CREATE DATABASE `chrome_record` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+
 CREATE TABLE `onBeforeRequest` (
   `_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
   `time` int(10) unsigned NOT NULL COMMENT '时间',
@@ -7,7 +9,7 @@ CREATE TABLE `onBeforeRequest` (
   `detail` text NOT NULL COMMENT 'JSON详细对象',
   `ua` varchar(255) NOT NULL,
   PRIMARY KEY (`_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 CREATE TABLE `onBeforeSendHeaders` (
   `_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
@@ -18,7 +20,7 @@ CREATE TABLE `onBeforeSendHeaders` (
   `detail` text NOT NULL COMMENT 'JSON详细对象',
   `ua` varchar(255) NOT NULL,
   PRIMARY KEY (`_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 CREATE TABLE `onCompleted` (
   `_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '自增ID',
@@ -29,4 +31,4 @@ CREATE TABLE `onCompleted` (
   `detail` text NOT NULL COMMENT 'JSON详细对象',
   `ua` varchar(255) NOT NULL,
   PRIMARY KEY (`_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
