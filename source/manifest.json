@@ -1,8 +1,8 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "访问统计",
   "description": "记录一切关于Chrome中的访问记录",
-  "version": "1.0",
+  "version": "1.1",
   "browser_action": {
     "default_icon": "icon.png"
   },
@@ -11,11 +11,26 @@
       "background.js"
     ]
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*"
+      ],
+      "css": [
+      ],
+      "js": [
+        "page_bg.js"
+      ]
+    }
+  ],
   "permissions": [
     "webRequest",
     "webRequestBlocking",
     "tabs",
     "http://*/*",
-    "https://*/*"
+    "https://*/*",
+    "file://*"
   ]
 }
