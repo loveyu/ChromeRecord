@@ -1,8 +1,8 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "访问统计",
-  "description": "记录一切关于Chrome中的访问记录",
-  "version": "1.1",
+  "description": "记录一切关于Chrome中的访问记录，会将数据提交到http://127.0.0.1/chrome_record.php",
+  "version": "1.2",
   "browser_action": {
     "default_icon": "icon.png"
   },
