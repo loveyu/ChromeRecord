@@ -63,7 +63,7 @@ var page_uuid = generateUUID();
     if (document.doctype) {
         load_event();
     } else if (document.xmlEncoding || document.xmlEncoding) {
-        no_doc_event("XML:" + content_type);
+        no_doc_event(content_type);
     } else if (content_type == "text/html") {
         load_event();
     } else if (/^text\//.test(content_type)) {
