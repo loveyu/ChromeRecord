@@ -1,36 +1,50 @@
 var chrome_page_bg = {
-    is_running: false,
-    run: function () {
-        if (chrome_page_bg.is_running) {
-            return;
-        }
-        chrome_page_bg.is_running = true;
-        chrome_page_bg.start();
-    },
-    start: function () {
-        window.addEventListener("hashchange", chrome_page_bg.event);
-        chrome_page_bg.event();
-    },
-    event: function () {
-        chrome_page_bg.send_message(location.href, document.title);
-    },
-    send_message: function (url, title) {
-        chrome.runtime.sendMessage({
-            greeting: "cr_log_data",
-            page_type: document.contentType + "",
-            log_data: {
-                url: url,
-                title: title,
-                referrer: document.referrer,
-                uuid: page_uuid
+        is_running: false,
+        last_url: null,
+        run: function () {
+            if (chrome_page_bg.is_running) {
+                return;
             }
-        }, function (response) {
-        });
-    },
-    load_event: function () {
-        chrome_page_bg.run();
+            chrome_page_bg.is_running = true;
+            chrome_page_bg.start();
+        },
+        start: function () {
+            window.addEventListener("hashchange", chrome_page_bg.event);
+            window.addEventListener('popstate', chrome_page_bg.event);
+            window.addEventListener('pushstate', chrome_page_bg.event);
+            window.addEventListener('load', chrome_page_bg.event);
+            chrome_page_bg.event();
+        },
+        event: function () {
+            console.log("E");
+            chrome_page_bg.send_message(location.href, document.title);
+        }
+        ,
+        send_message: function (url, title) {
+            if (chrome_page_bg.last_url !== url) {
+                chrome_page_bg.last_url = url;
+            } else {
+                //相同URL不触发
+                return;
+            }
+            chrome.runtime.sendMessage({
+                greeting: "cr_log_data",
+                page_type: document.contentType + "",
+                log_data: {
+                    url: url,
+                    title: title,
+                    referrer: document.referrer,
+                    uuid: page_uuid
+                }
+            }, function (response) {
+            });
+        }
+        ,
+        load_event: function () {
+            chrome_page_bg.run();
+        }
     }
-};
+    ;
 
 function generateUUID() {
     var d = new Date().getTime();
